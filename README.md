@@ -12,6 +12,23 @@ Classifies six activities from smartphone inertial sensors: WALKING, WALKING_UPS
 
 Selected model on the test set: **accuracy 95.52%, macro-F1 95.51%** (`outputs/metrics.json`, `outputs/confusion_matrix.png`).
 
+## What is in this repo
+
+| Path | Contents |
+|---|---|
+| `notebooks/HAR_project.ipynb` | Full walkthrough: loading, preprocessing checks, EDA graphs, model comparison, evaluation |
+| `train.py` | Script version of the training pipeline |
+| `app.py` | Streamlit app: live prediction, data and preprocessing charts, model results |
+| `outputs/figures/` | 11 charts produced by the notebook |
+| `outputs/metrics.json` | Final scores and confusion matrix |
+| `models/har_model.joblib` | Trained model |
+| `data/sample_test.csv` | 300 test windows used by the app |
+
+## Preprocessing
+
+- Dataset authors: noise filtering, 2.56 s windows with 50% overlap, body/gravity separation, 561 features per window, normalised to [-1, 1].
+- This project: verified 0 missing values and 0 duplicate rows, made repeated feature names unique (477 unique of 561), verified train and test subjects do not overlap, standard scaling inside the pipeline.
+
 ## Method
 
 - Data: UCI HAR Dataset, 561 pre-extracted features per 2.56 s window, 21 train / 9 test subjects.
@@ -24,7 +41,8 @@ Selected model on the test set: **accuracy 95.52%, macro-F1 95.51%** (`outputs/m
 ```bash
 python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+pip install -r requirements.txt        # app + training
+pip install -r requirements-dev.txt    # adds Jupyter and seaborn for the notebook
 ```
 
 Download `UCI HAR Dataset.zip` from the UCI Machine Learning Repository (dataset 240) and unzip it so the folder is `data/UCI HAR Dataset/`.
@@ -36,6 +54,14 @@ python train.py --data "data/UCI HAR Dataset" --out .
 ```
 
 Creates `models/har_model.joblib`, `outputs/metrics.json`, and `outputs/confusion_matrix.png`. Takes about 2 minutes on a laptop.
+
+## Run the notebook
+
+```bash
+jupyter notebook notebooks/HAR_project.ipynb
+```
+
+It downloads the dataset automatically if `data/UCI HAR Dataset/` is missing, and regenerates `outputs/figures/`.
 
 ## Run the web app (Streamlit)
 
