@@ -1,0 +1,25 @@
+Train: (7352, 561) from 21 subjects
+Test : (2947, 561) from 9 subjects
+Classes: ['WALKING', 'WALKING_UPSTAIRS', 'WALKING_DOWNSTAIRS', 'SITTING', 'STANDING', 'LAYING']
+[CV] LogisticRegression   accuracy = 0.9345 +/- 0.0391
+[CV] SVM_RBF              accuracy = 0.9241 +/- 0.0374
+[CV] RandomForest         accuracy = 0.9173 +/- 0.0439
+
+Best model by CV: LogisticRegression
+
+TEST accuracy = 0.9552   macro-F1 = 0.9551
+                    precision    recall  f1-score   support
+
+           WALKING     0.9444    0.9940    0.9686       496
+  WALKING_UPSTAIRS     0.9592    0.9490    0.9541       471
+WALKING_DOWNSTAIRS     0.9900    0.9405    0.9646       420
+           SITTING     0.9707    0.8758    0.9208       491
+          STANDING     0.8872    0.9756    0.9293       532
+            LAYING     0.9981    0.9888    0.9935       537
+
+          accuracy                         0.9552      2947
+         macro avg     0.9583    0.9539    0.9551      2947
+      weighted avg     0.9571    0.9552    0.9552      2947
+
+Saved model -> models/har_model.joblib
+Saved metrics -> outputs/metrics.json, outputs/confusion_matrix.png

@@ -1,0 +1,115 @@
+{
+  "best_model": "LogisticRegression",
+  "cv_results": {
+    "LogisticRegression": {
+      "cv_accuracy_mean": 0.9344712317448653,
+      "cv_accuracy_std": 0.03913153513720239
+    },
+    "SVM_RBF": {
+      "cv_accuracy_mean": 0.9240552388952465,
+      "cv_accuracy_std": 0.037401983538110875
+    },
+    "RandomForest": {
+      "cv_accuracy_mean": 0.9173186918085839,
+      "cv_accuracy_std": 0.043941221757934704
+    }
+  },
+  "test_accuracy": 0.9552086868001357,
+  "test_macro_f1": 0.9551271972303569,
+  "per_class": {
+    "WALKING": {
+      "precision": 0.9444444444444444,
+      "recall": 0.9939516129032258,
+      "f1-score": 0.9685658153241651,
+      "support": 496.0
+    },
+    "WALKING_UPSTAIRS": {
+      "precision": 0.9592274678111588,
+      "recall": 0.9490445859872612,
+      "f1-score": 0.9541088580576307,
+      "support": 471.0
+    },
+    "WALKING_DOWNSTAIRS": {
+      "precision": 0.9899749373433584,
+      "recall": 0.9404761904761905,
+      "f1-score": 0.9645909645909646,
+      "support": 420.0
+    },
+    "SITTING": {
+      "precision": 0.9706546275395034,
+      "recall": 0.8757637474541752,
+      "f1-score": 0.9207708779443254,
+      "support": 491.0
+    },
+    "STANDING": {
+      "precision": 0.8871794871794871,
+      "recall": 0.9755639097744361,
+      "f1-score": 0.9292748433303492,
+      "support": 532.0
+    },
+    "LAYING": {
+      "precision": 0.9981203007518797,
+      "recall": 0.9888268156424581,
+      "f1-score": 0.9934518241347053,
+      "support": 537.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      493,
+      0,
+      3,
+      0,
+      0,
+      0
+    ],
+    [
+      23,
+      447,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      6,
+      17,
+      395,
+      0,
+      2,
+      0
+    ],
+    [
+      0,
+      2,
+      0,
+      430,
+      58,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      13,
+      519,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      6,
+      531
+    ]
+  ],
+  "class_names": [
+    "WALKING",
+    "WALKING_UPSTAIRS",
+    "WALKING_DOWNSTAIRS",
+    "SITTING",
+    "STANDING",
+    "LAYING"
+  ]
+}
