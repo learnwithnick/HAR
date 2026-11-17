@@ -14,7 +14,7 @@ import streamlit as st
 ROOT = Path(__file__).parent
 MODEL_PATH = ROOT / "models" / "har_model.joblib"
 METRICS_PATH = ROOT / "outputs" / "metrics.json"
-TEST_DIR = ROOT / "data" / "UCI HAR Dataset" / "test"
+SAMPLE_PATH = ROOT / "data" / "sample_test.csv"  # 300 test windows shipped with the app
 N_FEATURES = 561
 
 
@@ -25,9 +25,9 @@ def load_model():
 
 @st.cache_data
 def load_test_split():
-    X = pd.read_csv(TEST_DIR / "X_test.txt", sep=r"\s+", header=None).values
-    y = pd.read_csv(TEST_DIR / "y_test.txt", header=None).values.ravel()
-    return X, y
+    # column 0 = true label (1..6), columns 1..561 = features
+    df = pd.read_csv(SAMPLE_PATH, header=None)
+    return df.iloc[:, 1:].values, df.iloc[:, 0].astype(int).values
 
 
 def predict(bundle, X):
@@ -67,13 +67,13 @@ with st.sidebar:
 
 mode = st.radio(
     "Choose input",
-    ["Sample from the UCI HAR test set", "Upload a CSV of features"],
+    ["Sample from the UCI HAR test set (300 windows)", "Upload a CSV of features"],
     horizontal=True,
 )
 
 if mode.startswith("Sample"):
-    if not TEST_DIR.exists():
-        st.error("Test data folder missing; check data/UCI HAR Dataset.")
+    if not SAMPLE_PATH.exists():
+        st.error("data/sample_test.csv is missing.")
         st.stop()
     X_test, y_test = load_test_split()
     idx = st.slider("Test window index", 0, len(X_test) - 1, 0)
@@ -98,4 +98,4 @@ else:
             names, proba = predict(bundle, df.values.astype(float))
             out = pd.DataFrame({"row": np.arange(len(names)), "prediction": names,
                                 "confidence": proba.max(axis=1).round(3)})
-            st.dataframe(out, use_container_width=True)
+            st.dataframe(out)

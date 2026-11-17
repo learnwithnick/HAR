@@ -45,6 +45,12 @@ streamlit run app.py
 
 Opens at http://localhost:8501. You can browse test windows or upload a CSV with 561 columns and one row per window.
 
-## Deploy
+## Deploy (Streamlit Community Cloud)
 
-Streamlit Community Cloud: push this folder to GitHub (include `models/` and `data/` or a small test sample), then deploy `app.py` from share.streamlit.io. Alternatively, run `streamlit run app.py --server.port 8501` on any Linux VM or container.
+The app is self-contained: it needs only `app.py`, `requirements.txt`, `models/`, `outputs/` and `data/sample_test.csv` (300 test windows). The full dataset is not required and is git-ignored.
+
+1. Push this folder to a public GitHub repo.
+2. Go to share.streamlit.io, sign in with GitHub, click "Create app".
+3. Pick the repo, branch `main`, main file `app.py`.
+4. In Advanced settings choose Python 3.12 or 3.13 (the model was saved with scikit-learn 1.9.1, pinned in requirements.txt).
+5. Deploy. You get a public `*.streamlit.app` URL.
