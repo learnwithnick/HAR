@@ -6,3 +6,4 @@ venv/
 # full raw dataset is large; the app only needs data/sample_test.csv
 data/UCI HAR Dataset/
 data/*.zip
+.ipynb_checkpoints/
